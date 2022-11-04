@@ -1,9 +1,0 @@
-title 
-abstract
-keywords
-introduction 
-literature survey 
-materials and methods / methadology !-- core work
-results and discussion 
-conclusion 
-references
