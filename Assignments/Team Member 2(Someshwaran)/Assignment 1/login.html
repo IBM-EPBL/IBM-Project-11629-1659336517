@@ -1,0 +1,37 @@
+<!DOCTYPE>
+<html>
+<head>
+</head><br>
+<br><center>
+<body bgcolor ="pink"><div class="container mt-5">
+<div class="row d-flex justify-content-center">
+<div class="col-md-6">
+<div class="card px-5 py-5" id="form1">
+<div class="form-data" v-if="!submitted">
+<div class="forms-inputs mb-4"> 
+<span>Email or username</span> 
+<input autocomplete="off" type="text" v-model="email" v-bind:class="{'form-control':true, 'is-invalid' : !validEmail(email) && emailBlured}" v-on:blur="emailBlured = true">
+<br>
+</div><br>
+<div class="forms-inputs mb-4"> 
+<span>Password</span> 
+<input autocomplete="off" type="password" v-model="password" v-bind:class="{'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured}" v-on:blur="passwordBlured = true">
+<ul class="panel-heading">
+<li class="panel-title">
+<a class="subMenu1" href="">
+<span class="subMenuHighlight">Forgot Password</span></a>
+</li>
+</ul> 
+</div>
+<br><br>
+<div class="mb-3"> 
+<button v-on:click.stop.prevent="submit" class="btn btn-dark w-100">Login</button> 
+</div>
+</div>
+          
+</div>
+</div>
+</div>
+</div></center>
+</body>
+<html>
