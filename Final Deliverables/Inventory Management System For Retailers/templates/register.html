@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{%block title %}register{% endblock %}
+{%block css %}<style>
+    p a:hover{
+        color: #ff0000;
+    }
+</style>{% endblock %}
+
+{% block body %}
+
+<div class="container mx-5 my-5">
+    <h2>New User Register here : &nbsp;</h2>
+    <form method="POST" action='/register'>
+        {% if not valid %}
+        <div style="color:red;" class="form-text">{{msg}}</div>
+        {% endif %}
+        <div class="mb-1">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username"
+            placeholder="Select a username for yourself">
+        </div>
+        
+        <div class="mb-1">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name"
+            placeholder="Enter your full name">
+        </div>
+        
+        <div class="mb-1">
+            <label for="exampleInputEmail1" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" name="mail"
+            aria-describedby="emailHelp" placeholder="Enter your email address">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        
+        <div class="mb-1">
+            <label for="contact" class="form-label">Contact</label>
+            <input type="number" class="form-control" id="contact" name="contact"
+            placeholder="Enter your contact number" aria-describedby="emailHelp">
+        </div>
+        
+        <div class="mb-1">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+        </div>
+        
+        <div class="mb-1">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+        </div>
+        
+        <div class="mb-1 form-check">
+            <input type="checkbox" class="form-check-input" id="t&c" name="t&c">
+            <label class="form-check-label" for="t&c">agree all Terms&Conditions</label>
+            {% if not check  %}
+            <div style="color:red;" class="form-text">{{msg}}</div>
+            {% endif %}
+            <p>Already Registered!<a href="{{ url_for('login') }}"> Login</a></p>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+        {% if success_msg  %}
+        <div style="color: green;" class="form-text">{{success_msg}}</div>
+        {% endif %}
+
+    </form>
+
+
+</div>
+
+{% endblock %}

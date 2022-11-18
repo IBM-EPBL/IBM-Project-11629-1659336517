@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{%block title %} ims | billing {% endblock %}
+{%block css %}
+<style>
+    .mybillarea {
+        font-size: 16px;
+        border: 2px solid #000;
+        margin: 1em;
+        padding: 1em;
+    }
+
+    td {
+        background-color: rgb(226, 228, 229);
+        margin-bottom: .5rem;
+        border-bottom: 2px solid #fff;
+    }
+
+    #p01 {
+        font-size: 18px;
+        text-align: center;
+        border-bottom: 1px dashed #000;
+    }
+
+    label {
+        margin: .4em 0px;
+    }
+</style>
+{% endblock %}
+{% block billactive %}active{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h2>Bill Management System</h2>
+    <div class="mybillarea container">
+        <p id="p01">ABC Retailer Shop
+            <br> M.987654321
+        </p>
+        <label for="cname">Bill No :&emsp; </label><input type="text" id="cno" value="b001">
+        <label for="cname">Customer Name:&emsp; </label><input type="text" id="cname" value="Sonam Gupta">
+
+        <!-- **************************Search box********************* -->
+        <div class="my-4">
+            <h4>Enter the Inventory ID : </h4>
+
+            <form action="/billing" method="POST">
+
+                <label for="iid">Inventory Id:&emsp; </label>
+                <input type="text" id="iid" name="iid" />
+
+                <button type="submit" class="btn btn-primary btn-group-toggle btn-sm"><i class="fa fa-search"
+                        aria-hidden="true"></i></button>
+            </form>
+        </div>
+
+        <div>
+            <h3>Product Details : &emsp;</h3>
+            <table style="width:100%">
+                <tr>
+                    <th>Inventory ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Unit Price</th>
+                </tr>
+
+                {% for item in items %}
+                <tr>
+                    <td id="d1">{{item[0]}}</td>
+                    <td id="d2">{{item[1]}}</td>
+                    <td id="d3">{{item[2]}}</td>
+                    <td id="d4">{{item[3]}}</td>
+                </tr>
+                {% endfor %}
+
+                <tr>
+                    <td><button class="btn btn-primary btn-group-toggle" id="plus-btn">Add to bill</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- *************** Billing Items ******************** -->
+        <div id="d01" class="my-4">
+            <h3>Billed Items</h3>
+            <table style="width:100%">
+                <tr>
+                    <th>Inventory ID</th>
+                    <th>Name</th>
+                    <th>Unit Price</th>
+                    <th>Quantity</th>
+                    <th>Total Value</th>
+                </tr>
+            </table>
+            <table style="width:100%" id="itemslist">
+
+                <!-- itemslist -->
+               
+            </table>
+
+            <input class="form-group form-select-lg mt-2" type="text" name="totalsum" id="totalsum" readonly
+                placeholder="Total Billed Amount">
+            <button class="btn btn-info btn-group-toggle" id="clearTotal">Clear Total</button>
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+<script>
+
+    $('#totalsum').val('0');
+
+    if (sessionStorage.getItem('cart') == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(sessionStorage.getItem('cart'));
+    }
+
+    $("#plus-btn").click(function () {
+        let iid = $('#d1').text();
+        let pname = $('#d2').text()
+        let price = parseInt($('#d4').text())
+        let qty = 1
+        let total = price * qty
+
+        var idstr = iid
+
+        if (cart[idstr] != undefined) {
+            console.log('if idstr******',cart[idstr])
+            price = cart[idstr][2]
+            qty = cart[idstr][3] + 1;
+            total = price * qty
+            cart[idstr] = [iid, pname, price, qty, total];
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+        }else{
+            cart[idstr] = [iid, pname, price, qty, total];
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+        };
+        
+        cart = JSON.parse(sessionStorage.getItem('cart'));
+        $('#itemslist').empty();
+        for (let item in cart) {
+            mystr = `
+                <tr>
+                    <td><input type="text" value="${cart[item][0]}"></td>
+                    <td><input type="text" value="${cart[item][1]}"></td>
+                    <td><input type="text" value="${cart[item][2]}"></td>
+                    <td><input type="text" value="${cart[item][3]}"></td>
+                    <td><input type="text" value="${cart[item][4]}"></td>
+
+                </tr>
+                `
+            $('#itemslist').append(mystr);
+        }
+
+    });
+
+    // Total bill logic
+    $("#plus-btn").click(function () {
+        var sum = 0;
+        console.log("total sum");
+        if (sessionStorage.getItem('cart') != null) {
+            cart = JSON.parse(sessionStorage.getItem('cart'));
+            for (let item in cart) {
+                sum += parseInt(cart[item][4])
+            }
+        }
+        $('#totalsum').val(sum.toString());
+    });    
+
+
+    $("#clearTotal").on("click", function () {
+        sessionStorage.clear();
+        $('#totalsum').val('');
+        $('#itemslist').empty();
+    });
+
+</script>
+{% endblock %}

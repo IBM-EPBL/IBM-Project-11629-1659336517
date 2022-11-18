@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{%block title %}ims | update item {% endblock %}
+{%block css %}{% endblock %}
+{% block imsactive %}active{% endblock %}
+
+{% block body %}
+
+<div class="container my-3" style=" height: 650px;">
+
+    <h2>Update the data here</h2>
+
+    <form action="/updateprod" method="POST">
+
+        <div class="mb-3 row">
+            <label for="iid" class="col-sm-2 col-form-label">Inventory ID</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="iid" name="iid"
+                    placeholder="Enter your Inventory ID" value="{{data.id}}">
+            </div>
+        </div>
+
+
+        <div class="mb-3 row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name"
+                    placeholder="Enter the product name " value="{{data.name}}">
+            </div>
+        </div>
+
+
+        <div class="mb-3 row">
+            <label for="desc" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="desc" name="desc"
+                    placeholder="Enter the product Description " value="{{data.desc}}">
+            </div>
+        </div>
+
+
+        <div class="mb-3 row">
+            <label for="price" class="col-sm-2 col-form-label">Price</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="price" name="price"
+                    placeholder="Enter the product unit  price " value="{{data.price}}">
+            </div>
+        </div>
+
+
+        <div class="mb-3 row">
+            <label for="stock" class="col-sm-2 col-form-label">Stock</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="stock" name="stock"
+                    placeholder="Enter the total quantity of items in stock" value="{{data.stock}}">
+            </div>
+        </div>
+
+
+        <div class="mb-3 row">
+            <label for="reol" class="col-sm-2 col-form-label">Reorder Level</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="reol" name="reol"
+                    placeholder="Enter the reoder level of the product" value="{{data.reorder}}">
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{%block title %}ims | update item {% endblock %}
+{%block css %}{% endblock %}
+{% block imsactive %}active{% endblock %}
+
+{% block body %}
+
+<div class="container my-3" style="height:650px;">
+
+    <h2>Delete the product from your shop</h2>
+
+    <form action="/delete" method="POST">
+
+        <div class="mb-3 row">
+            <label for="iid" class="col-sm-2 col-form-label">Inventory ID</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="iid" name="iid"
+                    placeholder="Enter the product Inventory ID to delete it" value="{{id}}">
+            </div>
+        </div>
+
+        
+        <div>
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

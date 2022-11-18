@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{%block title %}login{% endblock %}
+{%block css %}
+<style>
+    p a:hover{
+        color: rgb(211, 14, 14);
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container mx-5 my-5" style=" height: 500px;">
+    <h2>Registered User's Login here : </h2>
+    <form method="post" action='login'>
+        <div class="mb-1">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username"
+                placeholder="Select a username for yourself">
+            <div id="emailHelp" class="form-text">{{msg}}</div>
+        </div>
+
+        <div class="mb-1">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password"
+                placeholder="Enter your password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+        <br>
+        <p>New to Inventory Management System<a href="{{ url_for('register') }}"> Register Here</a></p>
+        <p>Forget Password<a href="{{ url_for('forgetpass') }}"> Get password</a></p>
+        <p>Update Password<a href="{{ url_for('updatepass') }}"> Update your password here</a></p> 
+    </form>
+
+</div>
+
+{% endblock %}

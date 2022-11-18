@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{%block title %}ims | shop{% endblock %}
+{%block css %}
+    <style>
+        td{
+            background-color: rgb(226, 228, 229);
+            margin-bottom: .5rem;
+            border-bottom: 2px solid #fff;
+        }
+    </style>
+{% endblock %}
+{% block imsactive %}active{% endblock %}
+
+{% block body %}
+
+    <div class="container my-2">
+
+        <!-- featured job -->
+        <div class="container">
+            <div class="card text-center">
+                <div class="card-header">
+                    Inventory Management System : {{shop_name}}
+                </div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="container my-2 mx-1">
+            <h2>Inventory Table</h2>
+            <table style="width:100%">
+                <tr>
+                    <th>Inventory ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Unit Price</th>
+                    <th>Qty in Stock</th>
+                    <th>Total Value</th>
+                    <th>Reorder Level</th>
+                </tr>
+
+                {% for item in items %}
+                <tr>
+                    <td id="{{item[0]}}">{{item[0]}}</td>
+                    <td>{{item[1]}}</td>
+                    <td>{{item[2]}}</td>
+                    <td>{{item[3]}}</td>
+                    <td>{{item[4]}}</td>
+                    <td>{{item[5]}}</td>
+                    <td>{{item[6]}}</td>
+                    <td><a href="/updateitem/{{item[0]}}" class="btn btn-primary">Update</a></td>
+                    <td><a href="/deleteitem/{{item[0]}}" class="btn btn-danger">Delete</a></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% endblock %}
+
+{% block js %}
+
+{% endblock %}

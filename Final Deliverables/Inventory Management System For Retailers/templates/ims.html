@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{%block title %}ims | shop{% endblock %}
+{%block css %}
+<style>
+    td {
+        background-color: rgb(226, 228, 229);
+        margin-bottom: .5rem;
+        border-bottom: 2px solid #fff;
+    }
+</style>
+{% endblock %}
+{% block imsactive %}active{% endblock %}
+
+{% block body %}
+
+<div class="container my-2">
+
+    <!-- featured job -->
+    <div class="container">
+        <div class="card text-center">
+            <div class="card-header">
+                Inventory Management System
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title">ABC Retail Shop</h5>
+                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis enim
+                    ab aliquid quibusdam optio, illo, excepturi quos asperiores ea provident ducimus odit
+                    libero ipsa ipsum consequatur, praesentium nihil qui vel.</p>
+                <a href="{{url_for('add')}}" class="btn btn-primary">Add New Product</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-2 mx-1">
+        <h2>Inventory Table</h2>
+    <table style="width:100%">
+        <tr>
+            <th>Inventory ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Unit Price</th>
+            <th>Qty in Stock</th>
+            <th>Total Value</th>
+            <th>Reorder Level</th>
+        </tr>
+
+        {% for item in items %}
+        <tr>
+            <td>{{item[0]}}</td>
+            <td>{{item[1]}}</td>
+            <td>{{item[2]}}</td>
+            <td>{{item[3]}}</td>
+            <td>{{item[4]}}</td>
+            <td>{{item[5]}}</td>
+            <td>{{item[6]}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
